@@ -10,17 +10,10 @@ pipeline {
     stages {
 		stage("Test"){
 			steps{
-				sh 'cd back-end'
 				sh 'mvn test'
-				archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
 			}
 		}
 		stage("Compile"){
-			when {
-				expression{
-					currentBuild.result == null || currentBuild.result == 'SUCCESS'
-				}
-			}
 			steps {
 				sh 'mvn compile'
 			}
