@@ -1,17 +1,13 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
 	agent any
-	/*{ 
-		dockerfile {
-			filename 'Dockerfile'
+	{
+		docker{
+			image 'maven:3.9.0-exlipse-temurin-11'
+			args '-v /root/.m2:/root/.m2'
 		}
-	}*/
+	}
     stages {
-/*		stage('SonarQube analysis'){
-			steps {
-				sh 'mvn clean package sonar:sonar jacoco:report -X -Dsonar.projectKey=com.rttbanking:cardmanagement -Dsonar.host.url=http://98.111.235.165:9000 -Dsonar.login=squ_d27f56461df9b43d67a62102f29a18e75bad65a2 > log.txt'
-			}
-		} */
 		stage("Test"){
 			steps{
 				sh 'cd back-end'
