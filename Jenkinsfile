@@ -1,7 +1,7 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
 	agent{
-		docker{
+		dockerContainer{
 			image 'node:16-alpine'
 		}
 	}
