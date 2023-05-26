@@ -2,13 +2,13 @@
 pipeline {
 	agent{
 		dockerContainer{
-			image 'node:16-alpine'
+			image 'amazoncorretto'
 		}
 	}
     stages {
 		stage("Test"){
 			steps{
-				sh 'node --version'
+				sh 'java --version'
 			}
 		}
     }
