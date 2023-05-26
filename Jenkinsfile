@@ -1,11 +1,14 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
-	agent any
-
+	agent{
+		dockerContainer{
+			image 'amazoncorretto'
+		}
+	}
     stages {
 		stage("Test"){
 			steps{
-				sh 'echo Hello World'
+				sh 'java --version'
 			}
 		}
     }
