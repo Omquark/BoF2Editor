@@ -2,13 +2,13 @@
 pipeline {
 	agent{
 		dockerContainer{
-			image 'amazoncorretto'
+			image 'mysql'
 		}
 	}
     stages {
 		stage("Test"){
 			steps{
-				sh 'java --version'
+				sh 'echo Installed MySQL'
 			}
 		}
     }
