@@ -15,7 +15,8 @@ pipeline {
 				docker {image 'node'}
 			}
 			steps {
-				sh 'front-end.sh'
+				sh 'ls'
+				sh './front-end.sh'
 			}
 		}
     }
