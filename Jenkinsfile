@@ -1,7 +1,7 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
 	agent{
-		dockerContainer{
+		docker{
 			image 'mysql'
 		}
 	}
