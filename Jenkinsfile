@@ -2,15 +2,14 @@
 pipeline {
 	agent none
     stages {
-		// stage("back-end"){
-		// 	agent{
-		// 		docker {image 'maven'}
-		// 	}
-		// 	steps{
-		// 		sh 'cd back-end'
-		// 		sh 'mvn clean install'
-		// 	}
-		// }
+		stage("back-end"){
+			agent{
+				docker {image 'maven'}
+			}
+			steps{
+				sh 'back-end/mvn clean install'
+			}
+		}
 		stage("front-end"){
 			agent{
 				docker {image 'node'}
