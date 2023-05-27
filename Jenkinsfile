@@ -1,9 +1,7 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
 	agent{
-		docker{
-			image 'mysql'
-		}
+		dockerfile true
 	}
     stages {
 		stage("Test"){
