@@ -1,7 +1,9 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
 	agent{
-		dockerfile true
+		docker {
+			image 'mode:18.16.0-alpine'
+		}
 	}
     stages {
 		stage("Test"){
