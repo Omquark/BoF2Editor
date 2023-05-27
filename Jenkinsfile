@@ -15,12 +15,7 @@ pipeline {
 				docker {image 'node'}
 			}
 			steps {
-				sh 'ls -l'
-				sh 'cd front-end'
-				sh 'ls -l'
-				sh 'front-end/npm install'
-				sh 'front-end/npm test'
-				sh 'front-end/npm run build'
+				sh 'front-end.sh'
 			}
 		}
     }
