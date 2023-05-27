@@ -1,4 +1,4 @@
-FROM openjdk:17-alpine
+FROM amazoncorretto
 USER root
 RUN apt-get update && apt-get install -y lsb-release
 RUN apt-get update && apt-get install -y docker-ce-cli
