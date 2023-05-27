@@ -16,6 +16,7 @@ pipeline {
 				docker {image 'node'}
 			}
 			steps {
+				sh 'ls'
 				sh 'cd front-end'
 				sh 'npm install'
 				sh 'npm test'
