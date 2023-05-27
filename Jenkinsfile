@@ -15,7 +15,12 @@ pipeline {
 				docker {image 'node'}
 			}
 			steps {
-				sh 'sudo ./front-end.sh'
+				ws('/front-end'){
+					cd front-end
+					npm install
+					npm test
+					npm run build
+				}
 				sh './front-end.sh'
 			}
 		}
