@@ -6,10 +6,24 @@ pipeline {
 		}
 	}
     stages {
-		stage("Java"){
+		stage("back-end"){
+			agent{
+				docker {image 'maven'}
+			}
 			steps{
-				sh 'ls -l'
-				sh 'pwd'
+				sh 'cd back-end'
+				sh 'mvn clean install'
+			}
+		}
+		stage("front-end"){
+			agent{
+				docker {image 'node'}
+			}
+			steps {
+				sh 'cd front-end'
+				sh 'npm install'
+				sh 'npm test'
+				sh 'npm run build'
 			}
 		}
     }
