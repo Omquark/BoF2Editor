@@ -8,7 +8,7 @@ pipeline {
     stages {
 		stage("Java"){
 			steps{
-				sh 'll'
+				sh 'ls -l'
 				sh 'pwd'
 			}
 		}
