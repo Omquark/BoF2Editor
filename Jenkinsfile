@@ -1,6 +1,10 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
-	agent any
+	agent {
+		dockerfile {
+			filename 'Dockerfile'
+		}
+	}
     stages {
 		stage("Test"){
 			steps{
