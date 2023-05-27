@@ -15,7 +15,7 @@ pipeline {
 				docker {image 'node'}
 			}
 			steps {
-				sh 'ls'
+				sh 'chmod 755 ./front-end.sh'
 				sh './front-end.sh'
 			}
 		}
