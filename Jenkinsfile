@@ -3,11 +3,8 @@ pipeline {
 	agent none
     stages {
 		stage("Test"){
-			agent {
-				dockerfile true
-			}
 			steps{
-				sh 'mvn --version'
+				sh 'echo Hello World'
 			}
 		}
     }
