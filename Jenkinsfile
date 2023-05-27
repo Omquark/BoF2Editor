@@ -6,9 +6,10 @@ pipeline {
 		}
 	}
     stages {
-		stage("Test"){
+		stage("Java"){
 			steps{
-				sh 'echo Hello World'
+				sh 'll'
+				sh 'pwd'
 			}
 		}
     }
