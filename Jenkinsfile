@@ -16,12 +16,11 @@ pipeline {
 			}
 			steps {
 				ws('/front-end'){
-					cd front-end
-					npm install
-					npm test
-					npm run build
+					sh 'cd front-end'
+					sh 'npm install'
+					sh 'npm test'
+					sh 'npm run build'
 				}
-				sh './front-end.sh'
 			}
 		}
     }
