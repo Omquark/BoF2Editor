@@ -1,6 +1,6 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
-	agent none
+	agent any
     stages {
 		// stage("back-end"){
 		// 	agent{
@@ -11,9 +11,6 @@ pipeline {
 		// 	}
 		// }
 		stage("front-end"){
-			agent{
-				docker {image 'node'}
-			}
 			steps {
 				// ws('/'){
 					sh('pwd')
