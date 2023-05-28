@@ -1,6 +1,8 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
-	agent any
+	agent docker {
+		image: 'node'
+	}
     stages {
 		// stage("back-end"){
 		// 	agent{
@@ -13,7 +15,7 @@ pipeline {
 		stage("front-end"){
 			steps {
 				ws('/front-end'){
-					sh('pwd')
+					sh 'pwd'
 					sh 'npm install'
 					// sh 'npm test'
 					// sh 'npm run build'
