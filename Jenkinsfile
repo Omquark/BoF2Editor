@@ -15,12 +15,12 @@ pipeline {
 				docker {image 'node'}
 			}
 			steps {
-				ws('/'){
+				// ws('/'){
 					sh('whoami')
 					// sh 'npm install'
 					// sh 'npm test'
 					// sh 'npm run build'
-				}
+				// }
 			}
 		}
     }
