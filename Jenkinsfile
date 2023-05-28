@@ -11,25 +11,17 @@ pipeline {
 		}
 		stage("front-end"){
 			steps {
-				step('install'){
-					dir('front-end'){
-						sh 'npm install'
-					}
+				dir('front-end'){
+					sh 'npm install'
 				}
-				step('test'){
-					dir('front-end'){
-						sh 'npm test'
-					}
+				dir('front-end'){
+					sh 'npm test'
 				}
-				step('build'){
-					dir('front-end'){
-						sh 'npm run build'
-					}
+				dir('front-end'){
+					sh 'npm run build'
 				}
-				step('serve'){
-						dir('front-end'){
-							sh 'npm serve'
-					}
+					dir('front-end'){
+						sh 'npm serve'
 				}
 			}
 		}
