@@ -1,8 +1,11 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
-	agent docker {
-		image: 'node'
+	agent {
+		docker {
+			image 'node:18'
+		}
 	}
+	
     stages {
 		// stage("back-end"){
 		// 	agent{
