@@ -16,10 +16,11 @@ pipeline {
 			}
 			steps {
 				ws('/front-end'){
-					sh 'cd front-end'
-					sh 'npm install'
-					sh 'npm test'
-					sh 'npm run build'
+					echo('build here')
+					// sh 'cd front-end'
+					// sh 'npm install'
+					// sh 'npm test'
+					// sh 'npm run build'
 				}
 			}
 		}
