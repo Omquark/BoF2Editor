@@ -12,11 +12,18 @@ pipeline {
 		stage("front-end"){
 			steps {
 				dir('front-end'){
-					sh 'pwd'
-					sh 'npm install'
-					sh 'npm test'
-					sh 'npm run build'
-					sh 'npm serve'
+					step('install'){
+						sh 'npm install'
+					}
+					step('test'){
+						sh 'npm test'
+					}
+					step('build'){
+						sh 'npm run build'
+					}
+					step('serve'){
+						sh 'npm serve'
+					}
 				}
 			}
 		}
