@@ -6,27 +6,27 @@ import Button from 'react-bootstrap/Button';
 export default function App() {
 
   const submitForm = async (event) => {
-    let file;
-    let fileInput = document.getElementById('romInput');
+    // let file;
+    // let fileInput = document.getElementById('romInput');
     event.preventDefault();
 
-    file = fileInput.files.item(0);
-    let dataStream = file.stream().getReader();
+    //file = fileInput.files.item(0);
+    //let dataStream = file.stream().getReader();
 
     let romData;
-    let result = await dataStream.read();
+    //let result = await dataStream.read();
     
     //while(result != )
     
     console.log(romData);
 
-    let response = await fetch("http://localhost:8080/rom",
-      {
-        method: "POST",
-        body: JSON.stringify({data: romData}),
-      })
-    let body = response.body;
-    let status = response.status;
+    // let response = await fetch("http://localhost:8080/rom",
+    //   {
+    //     method: "POST",
+    //     body: JSON.stringify({data: romData}),
+    //   })
+    //let body = response.body;
+    //let status = response.status;
   }
 
   return (
