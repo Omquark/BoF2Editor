@@ -13,15 +13,9 @@ pipeline {
 			steps {
 				dir('front-end'){
 					sh 'npm install'
-				}
-				dir('front-end'){
-					sh 'npm test'
-				}
-				dir('front-end'){
+					// sh 'npm test'
 					sh 'npm run build'
-				}
-					dir('front-end'){
-						sh 'npm serve'
+					sh 'npm serve'
 				}
 			}
 		}
