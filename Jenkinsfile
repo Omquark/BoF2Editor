@@ -12,12 +12,12 @@ pipeline {
 		// }
 		stage("front-end"){
 			steps {
-				// ws('/'){
+				ws('/front-end'){
 					sh('pwd')
 					// sh 'npm install'
 					// sh 'npm test'
 					// sh 'npm run build'
-				// }
+				}
 			}
 		}
     }
