@@ -15,10 +15,8 @@ pipeline {
 				docker {image 'node'}
 			}
 			steps {
-				ws('/front-end'){
-					echo('whoami')
-					sh ('whoami')
-					echo('after whoami')
+				ws('/'){
+					sh('whoami')
 					// sh 'npm install'
 					// sh 'npm test'
 					// sh 'npm run build'
