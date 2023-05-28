@@ -16,9 +16,10 @@ pipeline {
 			}
 			steps {
 				ws('/front-end'){
-					echo('build here')
+					echo('whoami')
 					sh ('whoami')
-					sh 'npm install'
+					echo('after whoami')
+					// sh 'npm install'
 					// sh 'npm test'
 					// sh 'npm run build'
 				}
