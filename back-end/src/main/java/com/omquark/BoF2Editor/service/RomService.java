@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RomService {
@@ -17,17 +18,8 @@ public class RomService {
      * @param value The JSONObject containing the ROM data in the format of "element slow": "value"
      *              where element slot is !> 65535 or value !> 255
      */
-    public boolean createRom(JSONObject value){
-        ArrayList<Byte> romData = new ArrayList<>(65536);
+    public Rom createRom(List<Integer> value){
 
-        //value.toMap().
-
-
-        for(int i = 0; i < 65536; i++){
-            romData.add(Integer.valueOf(value.getInt(Integer.toString(i))).byteValue());
-        }
-        Rom rom = new Rom(romData);
-
-        return false;
+        return new Rom(value);
     }
 }

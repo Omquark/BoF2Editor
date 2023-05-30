@@ -1,5 +1,6 @@
 /front-end/node_modules
 /front-end/.vs-code
+/front-end/build
 
 /back-end/.idea
 /back-end/.mvn
