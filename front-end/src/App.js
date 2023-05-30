@@ -3,7 +3,12 @@ import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button';
 
+import { ItemComp } from './component/Item';
+import { useState } from 'react';
+
 export default function App() {
+
+  const [itemList, setItemList] = useState([]);
 
   const submitForm = async (event) => {
     let file;
@@ -13,35 +18,54 @@ export default function App() {
     file = fileInput.files.item(0);
     let dataStream = file.stream().getReader();
 
-    let romData;
-    let result = await dataStream.read();
-    
-    //while(result != )
-    
-    console.log(romData);
+    let result = [];
+
+    while (true) {
+      let temp = await dataStream.read();
+      if (!temp.value) break;
+      temp.value.forEach(b => {
+        result.push(b);
+      })
+    }
 
     let response = await fetch("http://localhost:8080/rom",
       {
         method: "POST",
-        body: JSON.stringify({data: romData}),
+        body: JSON.stringify(result),
       })
-    let body = response.body;
-    let status = response.status;
+    let body = await response.json();
+    setItemList(body.itemList);
   }
 
   return (
-    <div className='text-center d-flex'>
-      <Card className='col-4 mx-auto'>
-        <Card.Body>
-          <Form onSubmit={(e) => submitForm(e)}>
-            <div className='d-flex text-nowrap'>
-              <Form.Label htmlFor='romInput'>Upload ROM</Form.Label>
-              <Form.Control type='file' id='romInput' />
-            </div>
-            <Button type='submit' className='mt-3'>Submit</Button>
-          </Form>
-        </Card.Body>
-      </Card>
+    <div className='text-center'>
+      <div>
+        <Card className='col-4 mx-auto'>
+          <Card.Body>
+            <Form onSubmit={(e) => submitForm(e)}>
+              <div className='d-flex text-nowrap'>
+                <Form.Label htmlFor='romInput'>Upload ROM</Form.Label>
+                <Form.Control type='file' id='romInput' />
+              </div>
+              <Button type='submit' className='mt-3'>Submit</Button>
+            </Form>
+          </Card.Body>
+        </Card>
+      </div>
+
+      <div className='d-flex flex-wrap border'>
+      {
+        Array.isArray(itemList) && itemList.length > 0 ?
+        itemList.map(item => {
+            return (
+              item.name !== '' ?
+                <ItemComp itemStats={item} /> : //item.name !== ''
+              <></> 
+            )
+          }) : //Array.isArray(itemList) && itemList.length > 0
+          <></>
+      }
+      </div>
     </div>
   )
 }

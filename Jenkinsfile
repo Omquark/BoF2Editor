@@ -1,15 +1,21 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
-	agent{
-		dockerContainer{
-			image 'amazoncorretto'
-		}
-	}
+	agent any
     stages {
-		stage("Test"){
+		stage("back-end"){
 			steps{
-				sh 'java --version'
+				dir("back-end"){
+					sh 'mvn clean install'
+				}
 			}
 		}
-    }
+		stage("front-end"){
+			steps {
+				dir('front-end'){
+					sh 'npm install'
+					sh 'npm run build'
+				}
+			}
+		}
+	}
 }
