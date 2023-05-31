@@ -4,11 +4,13 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button';
 
 import { ItemComp } from './component/Item';
+import { SpellComp } from './component/Spell';
 import { useState } from 'react';
 
 export default function App() {
 
   const [itemList, setItemList] = useState([]);
+  const [spellList, setSpellList] = useState([]);
 
   const submitForm = async (event) => {
     let file;
@@ -35,6 +37,7 @@ export default function App() {
       })
     let body = await response.json();
     setItemList(body.itemList);
+    setSpellList(body.spellList);
   }
 
   return (
@@ -54,7 +57,19 @@ export default function App() {
       </div>
 
       <div className='d-flex flex-wrap border'>
-      {
+
+        {
+          Array.isArray(spellList) && spellList.length > 0 ?
+            spellList.map(spell => {
+              return (
+                spell.name !== '' ?
+                  <SpellComp spellStats={spell} /> : //spell.name !== ''
+                  <></>
+              )
+            }) : //Array.isArray(spellList) && spellList.length > 0
+            <></>
+        }
+        {/**
         Array.isArray(itemList) && itemList.length > 0 ?
         itemList.map(item => {
             return (
@@ -64,7 +79,7 @@ export default function App() {
             )
           }) : //Array.isArray(itemList) && itemList.length > 0
           <></>
-      }
+        */}
       </div>
     </div>
   )

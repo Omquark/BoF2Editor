@@ -73,7 +73,7 @@ public class Rom {
         ArrayList<Item> itemList = new ArrayList<>();
         //0x100 items
         int itemCount = 0x100;
-        int itemOffset = 0x70000;
+        int itemOffset = 0x70200;
         int itemSize = 0x10;
         for(int i = 0; i < itemCount; i++){
             itemList.add(
