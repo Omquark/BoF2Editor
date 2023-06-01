@@ -19,13 +19,16 @@ export function ItemComp(props) {
                         {props.itemStats.name}
                     </span>
                     <span hidden={!changingName}>
-                        <input type='text' id='name' defaultValue={props.itemStats.name}/>
-                        {/* onBlur={() => setName()} */}
+                        <input
+                            type='text'
+                            id='name'
+                            defaultValue={props.itemStats.name}
+                            maxLength={8} />
+                        {/* onBlur={() => setName()} */} {/**TODO: activate when the Item name can be changed*/}
                     </span>
                 </Card.Header>
                 <Card.Body className='px-0 py-0 d-flex' style={{ fontSize: '12px' }}>
                     <div className='col-12 border'>
-                        {/* Cost */}
                         <ItemField value={props.itemStats.cost} label='Cost (Zenny)' />
                         <ItemField value={props.itemStats.description} label='Description' />
                         <ItemField value={props.itemStats.value} label='ATP/DFP' />

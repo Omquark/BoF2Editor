@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button';
 
 import { ItemComp } from './component/Item';
-import { SpellComp } from './component/Spell';
+import { SpellTable } from './component/Spell/SpellTable';
 import { useState } from 'react';
 
 export default function App() {
@@ -57,16 +57,9 @@ export default function App() {
       </div>
 
       <div className='d-flex flex-wrap border'>
-
         {
-          Array.isArray(spellList) && spellList.length > 0 ?
-            spellList.map(spell => {
-              return (
-                spell.name !== '' ?
-                  <SpellComp spellStats={spell} /> : //spell.name !== ''
-                  <></>
-              )
-            }) : //Array.isArray(spellList) && spellList.length > 0
+          spellList.length > 0 ?
+            <SpellTable spellList={spellList} /> :
             <></>
         }
         {/**

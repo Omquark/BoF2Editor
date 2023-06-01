@@ -39,7 +39,7 @@ public class Rom {
         ArrayList<Spell> spellList = new ArrayList<>();
         //0x53 spells
         int spellCount = 0x53;
-        int spellOffset = 0x584F0;
+        int spellOffset = 0x584F0 + 0x200;//Headerless offset
         int spellSize = 0x10;
         for(int i = 0; i < spellCount; i++){
             spellList.add(
@@ -73,7 +73,7 @@ public class Rom {
         ArrayList<Item> itemList = new ArrayList<>();
         //0x100 items
         int itemCount = 0x100;
-        int itemOffset = 0x70200;
+        int itemOffset = 0x70000 + 0x200;//Header offset
         int itemSize = 0x10;
         for(int i = 0; i < itemCount; i++){
             itemList.add(
