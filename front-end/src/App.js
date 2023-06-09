@@ -5,22 +5,29 @@ import Button from 'react-bootstrap/Button';
 
 import { ItemComp } from './component/Item';
 import { SpellTable } from './component/Spell/SpellTable';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
+
+export const SpellListContext = createContext();
+export const ItemListContext = createContext();
+export const MobListContext = createContext();
 
 export default function App() {
 
   const [itemList, setItemList] = useState([]);
   const [spellList, setSpellList] = useState([]);
+  const [mobList, setMobList] = useState([]);
 
   const submitForm = async (event) => {
+    let dataStream;
     let file;
+    let response;
+    let result = [];
     let fileInput = document.getElementById('romInput');
     event.preventDefault();
 
     file = fileInput.files.item(0);
-    let dataStream = file.stream().getReader();
-
-    let result = [];
+    console.log(file);
+    dataStream = file.stream().getReader();
 
     while (true) {
       let temp = await dataStream.read();
@@ -30,7 +37,7 @@ export default function App() {
       })
     }
 
-    let response = await fetch("http://localhost:8080/rom",
+    response = await fetch("http://localhost:8080/rom",
       {
         method: "POST",
         body: JSON.stringify(result),
@@ -38,6 +45,7 @@ export default function App() {
     let body = await response.json();
     setItemList(body.itemList);
     setSpellList(body.spellList);
+    setMobList(body.mobList);
   }
 
   return (
@@ -59,7 +67,11 @@ export default function App() {
       <div className='d-flex flex-wrap border'>
         {
           spellList.length > 0 ?
-            <SpellTable spellList={spellList} /> :
+            <div>
+              <SpellListContext.Provider value={spellList}>
+                <SpellTable />
+              </SpellListContext.Provider>
+            </div> :
             <></>
         }
         {/**

@@ -1,11 +1,15 @@
-import { SpellRow } from "./SpellRow"
+import { useContext } from "react";
+import { SpellRow } from "./SpellRow";
+import { SpellListContext } from "../../App";
 
-export function SpellTable(props) {
+export function SpellTable() {
+
+    const spellList = useContext(SpellListContext);
     return (
         <table className='table table-dark table-hover'>
-            <thead style={{ position: 'sticky' }}>
-            <tr style={{ position: 'sticky' }}>
-                <th style={{ position: 'sticky' }}>Name</th>
+            <thead>
+            <tr>
+                <th>Name</th>
                 <th>Cost</th>
                 <th>Description</th>
                 <th>Element</th>
@@ -16,8 +20,8 @@ export function SpellTable(props) {
             </thead>
             <tbody>
                 {
-                    props.spellList ? 
-                    props.spellList.map(spell => <SpellRow spell={spell} />) :
+                    spellList ?
+                    spellList.map((spell, index) => <SpellRow spell={spell} index={index}/>) :
                     <></>
                 }
             </tbody>

@@ -1,13 +1,36 @@
+import { createContext, useEffect, useState } from "react";
+
+import { SpellModal } from './SpellModal';
+
 export function SpellRow(props) {
+
+    const [spell, setSpell] = useState(props.spell);
+
+    const [show, setShow] = useState(false);
+
+    const showModal = () => {
+        setShow(true);
+    }
+
+    const hideModal = () => {
+        console.log('hide modal')
+        setShow(false);
+    }
+
+    //Title, value, type
+
     return (
-        <tr>
-            <td>{props.spell.name}</td>
-            <td>{props.spell.cost}</td>
-            <td>{props.spell.description}</td>
-            <td>{props.spell.element}</td>
-            <td>{props.spell.specSwitches}</td>
-            <td>{props.spell.moreSwitches}</td>
-            <td>{props.spell.moodCheck}</td>
+        <tr onMouseDown={showModal}>
+            {
+                Object.values(spell).map(value => {
+                    return (
+                        <td>
+                            {value}
+                        </td>
+                    )
+                })
+            }
+            <SpellModal spell={spell} setSpell={setSpell} show={show} hideModal={hideModal} />
         </tr>
     )
 }
