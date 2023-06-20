@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -37,7 +38,10 @@ public class Spell {
     private int moodCheck;
 
     public Spell(List<Integer> spellStats){
-        name = StringParser.fromRom(spellStats.subList(0x00, 0x08));
+        //name = StringParser.fromRom(spellStats.subList(0x00, 0x08));
+        StringBuilder sb = new StringBuilder();
+        spellStats.subList(0x00, 0x08).stream().map(c -> (char) Rom.convertByte(c).byteValue()).forEach(sb::append);
+        name = sb.toString();
         cost = spellStats.get(0x8) + (spellStats.get(0x9) * 0x100);
         description = spellStats.get(0x0A) + (spellStats.get(0x0B) * 0x100);
         element = spellStats.get(0x0C);

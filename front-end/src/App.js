@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 import { ItemComp } from './component/Item';
 import { SpellTable } from './component/Spell/SpellTable';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export const SpellListContext = createContext();
 export const ItemListContext = createContext();
@@ -16,6 +16,13 @@ export default function App() {
   const [itemList, setItemList] = useState([]);
   const [spellList, setSpellList] = useState([]);
   const [mobList, setMobList] = useState([]);
+  const [fileLoaded, setFileLoaded] = useState(false);
+
+  useEffect(() => {
+    if(localStorage.getItem('vanillaRom')){
+      setFileLoaded(true);
+    }
+  }, [])
 
   const submitForm = async (event) => {
     let dataStream;
@@ -26,16 +33,22 @@ export default function App() {
     event.preventDefault();
 
     file = fileInput.files.item(0);
+    localStorage.setItem('romPath', fileInput.value);
     console.log(file);
     dataStream = file.stream().getReader();
+    result = localStorage.getItem('vanillaRom');
 
-    while (true) {
+    while (true  && !fileLoaded) {
       let temp = await dataStream.read();
       if (!temp.value) break;
       temp.value.forEach(b => {
         result.push(b);
       })
     }
+
+    setFileLoaded(true);
+
+    localStorage.setItem('vanillaRom', result);
 
     response = await fetch("http://localhost:8080/rom",
       {
@@ -50,7 +63,7 @@ export default function App() {
 
   return (
     <div className='text-center'>
-      <div>
+      <div className='d-flex'>
         <Card className='col-4 mx-auto'>
           <Card.Body>
             <Form onSubmit={(e) => submitForm(e)}>
@@ -64,7 +77,7 @@ export default function App() {
         </Card>
       </div>
 
-      <div className='d-flex flex-wrap border'>
+      <div className=''>
         {
           spellList.length > 0 ?
             <div>

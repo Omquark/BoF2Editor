@@ -33,7 +33,9 @@ public class Item {
     private int spellWeight;
 
     public Item(List<Integer> rawItem){
-        name = StringParser.fromRom(rawItem.subList(0x00, 0x08));
+        StringBuilder sb = new StringBuilder();
+        rawItem.subList(0x00, 0x08).stream().map(c -> (char) Rom.convertByte(c).byteValue()).forEach(sb::append);
+        name = sb.toString();
         cost = rawItem.get(0x08) + (rawItem.get(0x09) * 0x100);
         description = rawItem.get(0x0A) + (rawItem.get(0x0B) * 0x100);
         specSwitches = rawItem.get(0x0C);
