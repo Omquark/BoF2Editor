@@ -40,7 +40,7 @@ public class Rom {
                 itemList
         );
         System.out.println("Test");
-        System.out.println(convertSingleString(0x290022));
+        //System.out.println(convertSingleString(0x290022));
     }
 
     private List<Spell> createSpellList() {
@@ -157,14 +157,13 @@ public class Rom {
                 case (0x06) -> { //Display lead char name
                 }
                 case (0x07) -> { //Display char name from 0x282AC6 with offset of next byte
+
                     int tempPos;
                     offset++;
                     //Read the next char to use as an index
                     readChar = rom.get(position + offset);
                     //Set the new temp position at the base of the character name
                     //Each character has 4 byte names, so multiply index by 4
-                    //Yes, changing a characters name will NOT change what other characters call them in story
-                    //Fucking hate Capcom for pulling this shit, just get it from the character array!
                     tempPos = 0x282AC6 + (readChar * 4);
                     //Read the characters name (4 Bytes)
                     for (int nameOffset = 0; nameOffset < 4; nameOffset++) {

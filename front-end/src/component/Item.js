@@ -2,7 +2,7 @@ import Card from "react-bootstrap/Card";
 import { ItemField } from "./ItemField";
 import { useState } from "react";
 
-export function ItemComp(props) {
+export function Item(props) {
 
     const [changingName, setChangingName] = useState(false);
 
@@ -12,7 +12,6 @@ export function ItemComp(props) {
     }
 
     return (
-        <div className='col-2'>
             <Card className='border rounded-0'>
                 <Card.Header className='h6' onDoubleClick={() => changeName()}>
                     <span hidden={changingName}>
@@ -38,6 +37,5 @@ export function ItemComp(props) {
                     </div>
                 </Card.Body>
             </Card>
-        </div>
     );
 }

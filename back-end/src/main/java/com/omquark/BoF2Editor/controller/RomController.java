@@ -19,7 +19,7 @@ public class RomController {
     RomService romService;
 
     @CrossOrigin(originPatterns = "*")
-    @PostMapping(path="/rom", consumes={ MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(path="/rom", consumes={ MediaType.APPLICATION_JSON_VALUE,
                                             MediaType.TEXT_PLAIN_VALUE,
                                             MediaType.APPLICATION_OCTET_STREAM_VALUE})
     public ResponseEntity<Game> getRom(@RequestBody String body){
