@@ -7,6 +7,9 @@ pipeline {
     stages {
 		stage("back-end-test"){
 			steps{
+				tools{
+					maven 'Maven3'
+				}
 				dir("back-end"){
 					sh 'mvn test'
 				}
