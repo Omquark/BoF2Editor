@@ -7,7 +7,7 @@ export function SpellModal(props) {
 
     useEffect (() => {
         setSpell(props.spell);
-    })
+    }, [props.spell])
 
     return (
         <Modal show={props.show} onHide={props.hideModal}>
