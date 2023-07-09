@@ -11,8 +11,10 @@ pipeline {
 				maven 'Maven'
 			}
 			steps{
-				dir("back-end"){
-					sh 'mvn test'
+				withEnv(["JAVA_HOME=/var/jenkins_home/tools/hudson.model.JDK/Java"]){
+					dir("back-end"){
+						sh 'mvn test'
+					}
 				}
 			}
 		}
