@@ -22,12 +22,14 @@ pipeline {
 		stage("back-end-build"){
 			steps{
 				dir("back-end"){
-					echo "BACK_BUILD is ${BACK_BUILD}"
 					sh 'mvn clean install'
 				}
 			}
 		}
 		stage("front-end"){
+			tools {
+				nodejs 'Nodejs'
+			}
 			steps {
 				dir('front-end'){
 					sh 'npm install'
