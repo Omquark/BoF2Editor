@@ -36,18 +36,19 @@ pipeline {
 				}
 			}
 		}
-	}
+	
 
-	stage("front-end"){
+		stage("front-end"){
 
-		tools {
-			nodejs 'Nodejs'
-		}
+			tools {
+				nodejs 'Nodejs'
+			}
 
-		steps {
-			dir('front-end'){
-				sh 'npm install'
-				sh 'npm run build'
+			steps {
+				dir('front-end'){
+					sh 'npm install'
+					sh 'npm run build'
+				}
 			}
 		}
 	}
