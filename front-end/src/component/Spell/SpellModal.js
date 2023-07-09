@@ -1,9 +1,13 @@
 import { Modal } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function SpellModal(props) {
 
-    const [spell, ] = useState(props.spell);
+    const [spell, setSpell] = useState([]);
+
+    useEffect (() => {
+        setSpell(props.spell);
+    })
 
     return (
         <Modal show={props.show} onHide={props.hideModal}>
