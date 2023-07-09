@@ -20,9 +20,15 @@ pipeline {
 			}
 		}
 		stage("back-end-build"){
+			tools{
+				jdk 'Java'
+				maven 'Maven'
+			}
 			steps{
-				dir("back-end"){
-					sh 'mvn clean install'
+				withEnv(['JAVA_HOME=/var/jenkins_home/tools/hudson.model.JDK/Java/jdk-17.0.7']){
+					dir("back-end"){
+						sh 'mvn clean install'
+					}
 				}
 			}
 		}
