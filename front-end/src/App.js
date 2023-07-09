@@ -15,7 +15,7 @@ export default function App() {
 
   const [itemList, setItemList] = useState([]);
   const [spellList, setSpellList] = useState([]);
-  const [mobList, setMobList] = useState([]);
+  const [/*mobList*/, setMobList] = useState([]);
   const [fileLoaded, setFileLoaded] = useState(false);
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export function SpellModal(props) {
 
-    const [spell, setSpell] = useState(props.spell);
+    const [spell, /*setSpell*/] = useState(props.spell);
 
     return (
         <Modal show={props.show} onHide={props.hideModal}>
