@@ -1,9 +1,9 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
 	agent any
-	environment{
-		'BACK_BUILD' = env.BUILD_NUMBER;
-	}
+	// environment{
+	// 	'BACK_BUILD' = env.BUILD_NUMBER;
+	// }
     stages {
 		stage("back-end-test"){
 			steps{
