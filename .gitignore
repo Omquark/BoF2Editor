@@ -6,3 +6,5 @@
 /back-end/.mvn
 
 /node_modules
+
+/back-end/pom.xml.versionsBackup
