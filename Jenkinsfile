@@ -5,33 +5,32 @@ pipeline {
 	// 	'BACK_BUILD' = env.BUILD_NUMBER;
 	// }
     stages {
-		stage("back-end-test"){
-			tools{
-				jdk 'Java'
-				maven 'Maven'
-			}
-			steps{
-				withEnv(['JAVA_HOME=/var/jenkins_home/tools/hudson.model.JDK/Java/jdk-17.0.7']){
-					dir("back-end"){
-						echo "${JAVA_HOME}"
-						sh 'mvn test'
+		dir('back-end'){
+			stage("back-end-test"){
+				tools{
+					jdk 'Java'
+					maven 'Maven'
+				}
+				steps{
+					withEnv(['JAVA_HOME=/var/jenkins_home/tools/hudson.model.JDK/Java/jdk-17.0.7']){
+							echo "${JAVA_HOME}"
+							sh 'mvn test'
+						}
+					}
+				}
+				stage("back-end-build"){
+					tools{
+						jdk 'Java'
+						maven 'Maven'
+					}
+					steps{
+							dir("back-end"){
+								sh 'mvn clean install'
+							}
 					}
 				}
 			}
-		}
-		stage("back-end-build"){
-			tools{
-				jdk 'Java'
-				maven 'Maven'
-			}
-			steps{
-				withEnv(['JAVA_HOME=/var/jenkins_home/tools/hudson.model.JDK/Java/jdk-17.0.7']){
-					dir("back-end"){
-						sh 'mvn clean install'
-					}
-				}
-			}
-		}
+
 		stage("front-end"){
 			tools {
 				nodejs 'Nodejs'
