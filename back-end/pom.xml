@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.omquark</groupId>
 	<artifactId>BoF2Editor</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>BoF2Editor</name>
 	<description>Breath of Fire 2 Editor/Randomizer</description>
 	<properties>
