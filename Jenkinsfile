@@ -6,6 +6,14 @@ pipeline {
 	// }
     stages {
 
+		stage('SonarQube analysis'){
+			steps {
+				withSonarQubeEnv('http://192.168.1.100:9000')
+				sh 'sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=front-end/src'
+				sh 'sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=back-end/src'
+			}
+		}
+
 		stage("back-end-test"){
 
 			tools{
