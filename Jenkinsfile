@@ -2,7 +2,7 @@
 pipeline {
 	agent any
 	environment{
-		BACK_BUILD = env.BUILD_NUMBER;
+		'BACK_BUILD' = env.BUILD_NUMBER;
 	}
     stages {
 		stage("back-end-test"){
