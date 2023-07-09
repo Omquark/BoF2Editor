@@ -5,8 +5,8 @@ pipeline {
 	// 	'BACK_BUILD' = env.BUILD_NUMBER;
 	// }
     stages {
-		dir('back-end'){
-			stage("back-end-test"){
+		stage("back-end-test"){
+			dir('back-end'){
 				tools{
 					jdk 'Java'
 					maven 'Maven'
