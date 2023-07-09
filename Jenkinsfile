@@ -16,7 +16,7 @@ pipeline {
 			steps{
 				dir('back-end'){
 					withEnv(['JAVA_HOME=/var/jenkins_home/tools/hudson.model.JDK/Java/jdk-17.0.7']){
-						echo "${JAVA_HOME}"
+						echo "using JAVA_HOME=${JAVA_HOME}"
 						sh 'mvn test'
 					}
 				}
@@ -32,7 +32,10 @@ pipeline {
 
 			steps{
 				dir("back-end"){
-					sh 'mvn clean install -DskipTests'
+					withEnv(['JAVA_HOME=/var/jenkins_home/tools/hudson.model.JDK/Java/jdk-17.0.7']){
+						echo "using JAVA_HOME=${JAVA_HOME}"
+						sh 'mvn clean install -DskipTests'
+					}
 				}
 			}
 		}
