@@ -7,7 +7,7 @@ pipeline {
     stages {
 		stage("back-end-test"){
 			tools{
-				jdk 'java'
+				jdk 'Java'
 				maven 'Maven'
 			}
 			steps{
