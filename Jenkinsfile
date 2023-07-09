@@ -6,11 +6,11 @@ pipeline {
 	// }
     stages {
 		stage("back-end-test"){
+			tools{
+				java 'Java'
+				maven 'Maven'
+			}
 			steps{
-				// tools{
-				// 	java 'Java'
-				// 	maven 'Maven'
-				// }
 				dir("back-end"){
 					sh 'mvn test'
 				}
