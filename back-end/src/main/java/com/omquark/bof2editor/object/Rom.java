@@ -1,4 +1,4 @@
-package com.omquark.BoF2Editor.object;
+package com.omquark.bof2editor.object;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import java.util.List;
 public class Rom {
 
     //The rom data
-    private final List<Integer> rom;
+    private final List<Integer> data;
 
     //Lists for game objects
     List<Spell> spellList;
@@ -23,28 +23,26 @@ public class Rom {
     private Game game;
 
     public Rom() {
-        rom = new ArrayList<>(65536);
+        data = new ArrayList<>(65536);
 
         for (int i = 0; i < 65536; i++)
-            rom.add(0);
+            data.add(0);
     }
 
     public Rom(List<Integer> data) {
-        rom = data;
-        List<Spell> spellList = createSpellList();
-        List<Mob> mobList = createMobList();
-        List<Item> itemList = createItemList();
+        this.data = data;
+        createSpellList();
+        createMobList();
+        createItemList();
         game = new Game(
                 spellList,
                 mobList,
                 itemList
         );
-        System.out.println("Test");
-        //System.out.println(convertSingleString(0x290022));
     }
 
-    private List<Spell> createSpellList() {
-        ArrayList<Spell> spellList = new ArrayList<>();
+    private void createSpellList() {
+        spellList = new ArrayList<>();
         //0x53 spells
         int spellCount = 0x53;
         int spellOffset = 0x584F0;// + 0x200;//Headerless offset
@@ -52,16 +50,15 @@ public class Rom {
         for (int i = 0; i < spellCount; i++) {
             spellList.add(
                     new Spell(
-                            rom.subList(spellOffset + (i * spellSize),
+                            data.subList(spellOffset + (i * spellSize),
                                     spellOffset + spellSize + (i * spellSize))
                     )
             );
         }
-        return spellList;
     }
 
-    private List<Mob> createMobList() {
-        ArrayList<Mob> mobList = new ArrayList<>();
+    private void createMobList() {
+        mobList = new ArrayList<>();
         //0x80 mobs
         int mobCount = 0x80;
         int mobOffset = 0x59000;
@@ -69,16 +66,15 @@ public class Rom {
         for (int i = 0; i < mobCount; i++) {
             mobList.add(
                     new Mob(
-                            rom.subList(mobOffset + (i * mobSize),
+                            data.subList(mobOffset + (i * mobSize),
                                     mobOffset + mobSize + (i * mobSize))
                     )
             );
         }
-        return mobList;
     }
 
-    private List<Item> createItemList() {
-        ArrayList<Item> itemList = new ArrayList<>();
+    private void createItemList() {
+        itemList = new ArrayList<>();
         //0x100 items
         int itemCount = 0x100;
         //Starts at 0x70000
@@ -88,20 +84,19 @@ public class Rom {
         for (int i = 0; i < itemCount; i++) {
             itemList.add(
                     new Item(
-                            rom.subList(itemOffset + (i * itemSize),
+                            data.subList(itemOffset + (i * itemSize),
                                     itemOffset + itemSize + (i * itemSize))
                     )
             );
         }
-        return itemList;
     }
 
     public void setByteAt(int index, int value) {
-        rom.set(index, value);
+        data.set(index, value);
     }
 
     public int getByteAt(int index) {
-        return rom.get(index);
+        return data.get(index);
     }
 
     /**
@@ -113,8 +108,8 @@ public class Rom {
     public String convertSingleString(final Integer position) {
         int readChar;
         StringBuilder sb = new StringBuilder();
-        for (int offset = 0; position + offset < rom.size(); offset++) {
-            readChar = rom.get(position + offset);
+        for (int offset = 0; position + offset < data.size(); offset++) {
+            readChar = data.get(position + offset);
             switch (readChar) {
                 case (0x00) -> { //Illegal Op
                 }
@@ -129,25 +124,22 @@ public class Rom {
                     Integer tempInt;
                     offset++;
                     //Read the next Byte, this is the dictionary index
-                    tempInt = rom.get(position + offset);
-                    //Double because we're searching a 16 nit array
+                    tempInt = data.get(position + offset);
+                    //Double because we're searching a 16 bit array
                     tempShort = (short) (tempInt * 2);
                     //Get the pointer in the dictionary offset with the index
                     //0x22DE00 is the default base for the dictionary index
-                    tempInt = rom.get(0x22DE00 + tempShort);
-                    tempInt += rom.get(0x22DE00 + tempShort + 1) * 0x100;
+                    tempInt = data.get(0x22DE00 + tempShort);
+                    tempInt += data.get(0x22DE00 + tempShort + 1) * 0x100;
                     tempInt += 0x22D000;
                     //We are now at the beginning of the dictionary
                     //The first number is the count of Bytes in the dictionary index
-                    tempShort = rom.get(tempInt).shortValue();
+                    tempShort = data.get(tempInt).shortValue();
                     //Now we convert the number of bytes read
                     for (int dictOffset = 0; dictOffset < tempShort; dictOffset++) {
-                        readChar = convertByte(rom.get(tempInt + dictOffset + 1));
+                        readChar = convertByte(data.get(tempInt + dictOffset + 1));
                         sb.append((char) readChar);
-                        if (readChar == 0x3D)
-                            System.out.println("Breakpoint");
                     }
-                    //sb.append(readChar);
                 }
                 case (0x04) -> { //Wait, end of box
                     sb.append("%04\n");
@@ -161,20 +153,20 @@ public class Rom {
                     int tempPos;
                     offset++;
                     //Read the next char to use as an index
-                    readChar = rom.get(position + offset);
+                    readChar = data.get(position + offset);
                     //Set the new temp position at the base of the character name
                     //Each character has 4 byte names, so multiply index by 4
                     tempPos = 0x282AC6 + (readChar * 4);
                     //Read the characters name (4 Bytes)
                     for (int nameOffset = 0; nameOffset < 4; nameOffset++) {
-                        sb.append(rom.get(tempPos + nameOffset));
+                        sb.append(data.get(tempPos + nameOffset));
                     }
                 }
                 case (0x08) -> { //Displays choice. Goes to index on yes, display next text on no
                 }
                 case (0x09) -> { //Display text from 0x55160(Cities) 0x00 terminated, 8 char max
                 }
-                case (0x0A) -> { //Display text from 58500 with index of next byte (Spells)
+                case (0x0A) -> { //Display text from 0x58500 with index of next byte (Spells)
                 }
                 case (0x0B) -> { //Sound effect from index
                 }

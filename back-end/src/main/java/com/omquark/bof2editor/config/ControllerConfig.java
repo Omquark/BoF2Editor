@@ -1,4 +1,4 @@
-package com.omquark.BoF2Editor.config;
+package com.omquark.bof2editor.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

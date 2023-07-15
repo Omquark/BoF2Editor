@@ -1,9 +1,8 @@
-package com.omquark.BoF2Editor.config;
+package com.omquark.bof2editor.config;
 
-import com.omquark.BoF2Editor.Logger.Logger;
+import com.omquark.bof2editor.Logger.Logger;
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,7 +28,7 @@ public class Config {
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    private final String PATH_DELIMITER = "\\";
+    private static final String PATH_DELIMITER = "\\";
 
     private Logger.LogLevel logLevel;
     private int backEndPort;
@@ -43,27 +42,31 @@ public class Config {
     @Setter(AccessLevel.NONE)
     private Properties props = new Properties();
 
-    public static Config config = null;
+    public static final Config config;
 
-    public Config(){
-        init();
+    static {
+        config = new Config();
     }
 
-    public void init(){
+    public Config(){
         if(config != null){
             Logger.writeToLog(Logger.LogLevel.INFO, "Attempted to init while already defined! I will not re-init.");
             return;
         }
 
+        init();
+    }
+
+    public void init(){
+
         String reader;
 
-        config = this;
+        String propsFile = DEFAULT_CONFIG_PATH + PATH_DELIMITER + DEFAULT_CONFIG_FILE;
 
-        try {
-            String propsFile = DEFAULT_CONFIG_PATH + PATH_DELIMITER + DEFAULT_CONFIG_FILE;
-            props.load(new FileReader(propsFile));
+        try (FileReader fr = new FileReader(propsFile)){
+            props.load(fr);
         } catch (IOException e){
-            Logger.writeToLog(Logger.LogLevel.ERROR, "Unable to read file! Will attempt to continue using default props.");
+            Logger.writeToLog(Logger.LogLevel.ERROR, "I met an error attempting to read the props file! I will try to continue with the default props.");
         }
 
         reader = (String) props.getOrDefault("backEndPort", BACK_END_PORT_DEFAULT);

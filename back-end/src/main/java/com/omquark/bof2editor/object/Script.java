@@ -1,4 +1,4 @@
-package com.omquark.BoF2Editor.object;
+package com.omquark.bof2editor.object;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 @Getter
 @Setter

@@ -1,4 +1,4 @@
-package com.omquark.BoF2Editor;
+package com.omquark.bof2editor;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

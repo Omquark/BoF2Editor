@@ -1,11 +1,8 @@
-package com.omquark.BoF2Editor.service;
+package com.omquark.bof2editor.service;
 
-import com.omquark.BoF2Editor.object.Rom;
-import org.json.JSONObject;
+import com.omquark.bof2editor.object.Rom;
 import org.springframework.stereotype.Service;
 
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

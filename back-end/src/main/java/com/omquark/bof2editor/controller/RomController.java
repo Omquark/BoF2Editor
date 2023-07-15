@@ -1,9 +1,8 @@
-package com.omquark.BoF2Editor.controller;
+package com.omquark.bof2editor.controller;
 
-import com.omquark.BoF2Editor.object.Game;
-import com.omquark.BoF2Editor.object.Rom;
-import com.omquark.BoF2Editor.service.RomService;
-import org.json.JSONObject;
+import com.omquark.bof2editor.object.Game;
+import com.omquark.bof2editor.object.Rom;
+import com.omquark.bof2editor.service.RomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
