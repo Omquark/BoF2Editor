@@ -7,7 +7,7 @@ pipeline {
     	stages {
 		stage("SonarQube analysis"){
 			tools{
-				sonar 'SonarQube'
+				hudson.plugins.sonar.MsBuildSQRunnerInstallation 'SonarQube'
 			}
 			steps {
 				withSonarQubeEnv('SonarQubeServer'){
