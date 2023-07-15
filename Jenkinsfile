@@ -8,8 +8,11 @@ pipeline {
 		stage("SonarQube analysis"){
 			environment{
 				scannerHome = tool 'SonarQube'
+			}
+			tools{
 				nodejs 'Nodejs'
 			}
+			
 			steps {
 				withSonarQubeEnv('SonarQubeServer'){
 					// sh "find / | grep sonar" 
