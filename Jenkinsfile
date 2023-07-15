@@ -72,7 +72,7 @@ pipeline {
 						
 						sh "${scannerHome}/bin/sonar-scanner \
 							-Dsonar.projectKey=BoF2Editor \
-							-Dsonar.sources=back-end/ \
+							-Dsonar.sources=./ \
 							-Dsonar.host.url=http://192.168.1.100:9000 \
 							-Dsonar.token=sqp_cbe463e1b5e25b383113def53321a36d406b17c0"
 					}
