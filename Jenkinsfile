@@ -4,15 +4,15 @@ pipeline {
 	// environment{
 	// 	'BACK_BUILD' = env.BUILD_NUMBER;
 	// }
-    stages {
-
-		stage('SonarQube analysis'){
-			steps {
-				def scannerHome = tool 'SonarQube';
+    	stages {
+		steps {
+			withSonarQubeEnv('SoanrQube'){
+				sh "find / | grep sonar" 
 				sh "${scanner-home}/bin/sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=front-end/src"
 				sh "${scanner-home}/bin/sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=back-end/src"
 			}
 		}
+	}
 
 		stage("back-end-test"){
 
@@ -48,7 +48,6 @@ pipeline {
 			}
 		}
 	
-
 		stage("front-end"){
 
 			tools {
@@ -63,5 +62,4 @@ pipeline {
 			}
 		}
 	}
-}
 
