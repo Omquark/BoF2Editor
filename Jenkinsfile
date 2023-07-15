@@ -8,6 +8,9 @@ pipeline {
 
 		stage('SonarQube analysis'){
 			steps {
+				tools{
+					sonar 'SonarQube'
+				}
 				withSonarQubeEnv('SonarQube'){
 					sh 'sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=front-end/src'
 					sh 'sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=back-end/src'
