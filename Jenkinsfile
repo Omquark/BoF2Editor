@@ -9,13 +9,13 @@ pipeline {
 			steps {
 				withSonarQubeEnv('SonarQubeServer'){
 					sh "find / | grep sonar" 
-					sh "sonar-scanner \
+					sh "SonarQube \
 						-Dsonar.projectKey=BoF2Editor \
 						-Dsonar.sources=front-end/src \
 						-Dsonar.host.url=http://localhost:9000 \
 						-Dsonar.token=sqp_cbe463e1b5e25b383113def53321a36d406b17c0"
 					
-					sh "sonar-scanner \
+					sh "SonarQube \
 						-Dsonar.projectKey=BoF2Editor \
 						-Dsonar.sources=back-end/src \
 						-Dsonar.host.url=http://localhost:9000 \
