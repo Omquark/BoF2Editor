@@ -5,26 +5,6 @@ pipeline {
 	// 	'BACK_BUILD' = env.BUILD_NUMBER;
 	// }
     	stages {
-		stage("SonarQube front-end analysis"){
-			environment{
-				scannerHome = tool 'SonarQube'
-			}
-			tools{
-				nodejs 'Nodejs'
-			}
-			
-			steps {
-				withSonarQubeEnv('SonarQubeServer'){
-					// sh "find / | grep sonar"
-					echo "Scanning front-end with nodejs"
-					sh "${scannerHome}/bin/sonar-scanner \
-						-Dsonar.projectKey=BoF2Editor:front-end \
-						-Dsonar.sources=front-end/ \
-						-Dsonar.host.url=http://192.168.1.100:9000 \
-						-Dsonar.token=sqp_3e16158c41f01c4cd0655f874a1b271210aa5a2c"
-				}
-			}
-		}
 
 		stage("back-end-test"){
 
@@ -84,7 +64,28 @@ pipeline {
 			}
 		}
 	
-		stage("front-end"){
+		stage("SonarQube front-end analysis"){
+			environment{
+				scannerHome = tool 'SonarQube'
+			}
+			tools{
+				nodejs 'Nodejs'
+			}
+			
+			steps {
+				withSonarQubeEnv('SonarQubeServer'){
+					// sh "find / | grep sonar"
+					echo "Scanning front-end with nodejs"
+					sh "${scannerHome}/bin/sonar-scanner \
+						-Dsonar.projectKey=BoF2Editor:front-end \
+						-Dsonar.sources=front-end/ \
+						-Dsonar.host.url=http://192.168.1.100:9000 \
+						-Dsonar.token=sqp_3e16158c41f01c4cd0655f874a1b271210aa5a2c"
+				}
+			}
+		}
+
+		stage("front-end build"){
 			environment{
 				CI = false
 			}
