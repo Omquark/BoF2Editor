@@ -6,6 +6,9 @@ pipeline {
 	// }
     	stages {
 		stage("SonarQube analysis"){
+			tools{
+				sonar-scanner 'SonarQube'
+			}
 			steps {
 				withSonarQubeEnv('SonarQubeServer'){
 					sh "find / | grep sonar" 
