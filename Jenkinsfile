@@ -7,7 +7,7 @@ pipeline {
     	stages {
 		stage("SonarQube analysis"){
 			tools{
-				SonarRunnerInstallation 'SonarQube'
+				SonarRunnerInstallation
 			}
 			steps {
 				withSonarQubeEnv('SonarQubeServer'){
