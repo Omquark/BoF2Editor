@@ -59,7 +59,7 @@ pipeline {
 			}
 		}
 
-		stage('back-end-build and SonarQube'){
+		stage('back-end-build'){
 			environment{
 				scannerHome = tool 'SonarQube'
 			}
