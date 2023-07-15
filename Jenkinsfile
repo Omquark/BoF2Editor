@@ -8,7 +8,7 @@ pipeline {
 
 		stage('SonarQube analysis'){
 			steps {
-				withSonarQubeEnv('http://localhost:9000'){
+				withSonarQubeEnv('SonarQube'){
 					sh 'sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=front-end/src'
 					sh 'sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=back-end/src'
 				}
