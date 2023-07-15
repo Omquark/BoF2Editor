@@ -85,6 +85,9 @@ pipeline {
 		}
 	
 		stage("front-end"){
+			environment{
+				CI = false
+			}
 
 			tools {
 				nodejs 'Nodejs'
