@@ -5,11 +5,13 @@ pipeline {
 	// 	'BACK_BUILD' = env.BUILD_NUMBER;
 	// }
     	stages {
-		steps {
-			withSonarQubeEnv('SoanrQube'){
-				sh "find / | grep sonar" 
-				sh "${scanner-home}/bin/sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=front-end/src"
-				sh "${scanner-home}/bin/sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=back-end/src"
+		stage("SonarQube analysis"){
+			steps {
+				withSonarQubeEnv('SoanrQube'){
+					sh "find / | grep sonar" 
+					sh "${scanner-home}/bin/sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=front-end/src"
+					sh "${scanner-home}/bin/sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=back-end/src"
+				}
 			}
 		}
 
