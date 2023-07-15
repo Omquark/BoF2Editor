@@ -7,13 +7,11 @@ pipeline {
     stages {
 
 		stage('SonarQube analysis'){
-			tools{
-				sonar 'SonarQube'
-			}
+			def scannerHome = tool 'sonar';
 			steps {
 				withSonarQubeEnv('SonarQube'){
-					sh 'sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=front-end/src'
-					sh 'sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=back-end/src'
+					sh "${scanner-home}/bin/sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=front-end/src"
+					sh "${scanner-home}/bin/sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=back-end/src"
 				}
 			}
 		}
