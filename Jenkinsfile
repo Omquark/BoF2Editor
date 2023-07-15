@@ -53,7 +53,12 @@ pipeline {
 				dir('back-end'){
 					withEnv(['JAVA_HOME=/var/jenkins_home/tools/hudson.model.JDK/Java/jdk-17.0.7']){
 						echo "using JAVA_HOME=${JAVA_HOME}"
-						sh 'mvn clean verify sonar:sonar -Dsonar.token=sqp_341a6a2a43f2b486091d059547efabf3cadc8609'
+						sh 'mvn clean verify sonar:sonar \
+							-Dsonar.projectKey=BoF2Editor:back-end \
+							-Dsonar.prjectName="BoF2Editor:back-end" \
+							-Dsonar.sources=./ \
+							-Dsonar.host.url=http://192.168.1.100:9000 \
+							-Dsonar.token=sqp_341a6a2a43f2b486091d059547efabf3cadc8609'
 					}
 				}
 			}
