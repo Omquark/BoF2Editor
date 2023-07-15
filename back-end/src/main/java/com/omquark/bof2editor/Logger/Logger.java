@@ -1,4 +1,4 @@
-package com.omquark.BoF2Editor.Logger;
+package com.omquark.bof2editor.Logger;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,6 @@ import java.sql.Time;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 public class Logger {
 
@@ -50,7 +49,7 @@ public class Logger {
      * @return The current time in a Date Object calling Time.from(Instant.now())
      */
     private static Date getCurrentTime(){
-        return Time.from(Instant.now());
+        return Date.from(Instant.now());
     }
 
     /**

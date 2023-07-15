@@ -1,7 +1,7 @@
-package com.omquark.BoF2Editor;
+package com.omquark.bof2editor;
 
-import com.omquark.BoF2Editor.Logger.Logger;
-import com.omquark.BoF2Editor.config.Config;
+import com.omquark.bof2editor.Logger.Logger;
+import com.omquark.bof2editor.config.Config;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,7 +13,7 @@ public class BoF2EditorApplication {
 
 
 	public static void main(String[] args) {
-		new Config();
+		//new Config();
 		HashMap<String, Object> serverOptions;
 
 		Config.report();

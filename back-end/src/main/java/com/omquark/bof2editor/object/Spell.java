@@ -1,11 +1,10 @@
-package com.omquark.BoF2Editor.object;
+package com.omquark.bof2editor.object;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 /**
@@ -38,7 +37,6 @@ public class Spell {
     private int moodCheck;
 
     public Spell(List<Integer> spellStats){
-        //name = StringParser.fromRom(spellStats.subList(0x00, 0x08));
         StringBuilder sb = new StringBuilder();
         spellStats.subList(0x00, 0x08).stream().map(c -> (char) Rom.convertByte(c).byteValue()).forEach(sb::append);
         name = sb.toString();

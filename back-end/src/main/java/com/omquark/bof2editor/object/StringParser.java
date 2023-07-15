@@ -1,4 +1,4 @@
-package com.omquark.BoF2Editor.object;
+package com.omquark.bof2editor.object;
 
 import java.util.List;
 
@@ -6,6 +6,10 @@ import java.util.List;
  * Parses strings from and to a way to store and read from the rom
  */
 public class StringParser {
+
+    private StringParser (){
+        
+    }
 
     /**
      * Converts a string from the rom into what will be displayed while playing

@@ -1,4 +1,4 @@
-package com.omquark.BoF2Editor.object;
+package com.omquark.bof2editor.object;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
