@@ -5,7 +5,7 @@ pipeline {
 	// 	'BACK_BUILD' = env.BUILD_NUMBER;
 	// }
     	stages {
-		stage("SonarQube analysis"){
+		stage("SonarQube front-end analysis"){
 			environment{
 				scannerHome = tool 'SonarQube'
 			}
@@ -18,23 +18,13 @@ pipeline {
 					// sh "find / | grep sonar"
 					echo "Scanning front-end with nodejs"
 					sh "${scannerHome}/bin/sonar-scanner \
-						-Dsonar.projectKey=BoF2Editor \
+						-Dsonar.projectKey=BoF2Editor:front-end \
 						-Dsonar.sources=front-end/ \
 						-Dsonar.host.url=http://192.168.1.100:9000 \
-						-Dsonar.token=sqp_cbe463e1b5e25b383113def53321a36d406b17c0"
-
-						//-Dsonar.sources=front-end/src \
-
-					//echo "Scanning back-end"
-					//sh "${scannerHome}/bin/sonar-scanner \
-					//	-Dsonar.projectKey=BoF2Editor \
-					//	-Dsonar.sources=back-end/src \
-					//	-Dsonar.host.url=http://192.168.1.100:9000 \
-					//	-Dsonar.token=sqp_cbe463e1b5e25b383113def53321a36d406b17c0"
+						-Dsonar.token=sqp_3e16158c41f01c4cd0655f874a1b271210aa5a2c"
 				}
 			}
 		}
-
 
 		stage("back-end-test"){
 
@@ -53,7 +43,23 @@ pipeline {
 			}
 		}
 
-		stage("back-end-build and SonarQube"){
+		stage('SonarQube back-end analysis'){
+			tools{
+				jdk 'Java'
+				maven 'Maven'
+			}
+
+			steps{
+				dir('back-end'){
+					withEnv(['JAVA_HOME=/var/jenkins_home/tools/hudson.model.JDK/Java/jdk-17.0.7']){
+						echo "using JAVA_HOME=${JAVA_HOME}"
+						sh 'mvn clean verify sonar:sonar -Dsonar.token='
+					}
+				}
+			}
+		}
+
+		stage('back-end-build and SonarQube'){
 			environment{
 				scannerHome = tool 'SonarQube'
 			}
@@ -68,14 +74,6 @@ pipeline {
 					withEnv(['JAVA_HOME=/var/jenkins_home/tools/hudson.model.JDK/Java/jdk-17.0.7']){
 						echo "using JAVA_HOME=${JAVA_HOME}"
 						sh 'mvn clean install -DskipTests'
-
-						
-						sh "${scannerHome}/bin/sonar-scanner \
-							-Dsonar.projectKey=BoF2Editor \
-							-Dsonar.sources=./ \
-							-Dsonar.host.url=http://192.168.1.100:9000 \
-							-Dsonar.token=sqp_cbe463e1b5e25b383113def53321a36d406b17c0 \
-							-Dsonar.java.binaries=target/classes"
 					}
 				}
 			}

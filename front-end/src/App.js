@@ -63,7 +63,7 @@ export default function App() {
     setSpellList(body.spellList);
     //setMobList(body.mobList);
 
-    console.log(mobList);
+    //console.log(mobList);
   }
 
   return (
