@@ -56,8 +56,7 @@ pipeline {
 						sh 'mvn clean verify sonar:sonar \
 							-DskipTests \
 							-Dsonar.projectKey=BoF2Editor:back-end \
-							-Dsonar.prjectName="BoF2Editor:back-end" \
-							-Dsonar.sources=./ \
+							-Dsonar.projectName="BoF2Editor:back-end" \
 							-Dsonar.host.url=http://192.168.1.100:9000 \
 							-Dsonar.token=sqp_341a6a2a43f2b486091d059547efabf3cadc8609'
 					}
