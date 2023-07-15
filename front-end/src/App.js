@@ -15,7 +15,7 @@ export default function App() {
 
   const [itemList, setItemList] = useState([]);
   const [spellList, setSpellList] = useState([]);
-  const [mobList, setMobList] = useState([]);
+  //const [mobList, setMobList] = useState([]);
   const [fileLoaded, setFileLoaded] = useState(false);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function App() {
     let body = await response.json();
     setItemList(body.itemList);
     setSpellList(body.spellList);
-    setMobList(body.mobList);
+    //setMobList(body.mobList);
 
     console.log(mobList);
   }
