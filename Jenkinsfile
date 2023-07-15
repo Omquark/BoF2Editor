@@ -7,7 +7,7 @@ pipeline {
     	stages {
 		stage("SonarQube analysis"){
 			steps {
-				withSonarQubeEnv('SonarQube'){
+				withSonarQubeEnv('SonarQubeServer'){
 					sh "find / | grep sonar" 
 					sh "${scanner-home}/bin/sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=front-end/src"
 					sh "${scanner-home}/bin/sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=back-end/src"
