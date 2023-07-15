@@ -12,7 +12,7 @@ pipeline {
 				sh "${scanner-home}/bin/sonar-scanner -Dsonar.projectKey=BoF2Editor -Dsonar.sources=back-end/src"
 			}
 		}
-	}
+
 
 		stage("back-end-test"){
 
@@ -62,4 +62,5 @@ pipeline {
 			}
 		}
 	}
+}
 
