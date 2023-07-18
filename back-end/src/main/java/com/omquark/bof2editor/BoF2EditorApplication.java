@@ -13,7 +13,6 @@ public class BoF2EditorApplication {
 
 
 	public static void main(String[] args) {
-		//new Config();
 		HashMap<String, Object> serverOptions;
 
 		Config.report();

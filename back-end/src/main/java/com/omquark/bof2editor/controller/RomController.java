@@ -24,7 +24,7 @@ public class RomController {
     public ResponseEntity<Game> getRom(@RequestBody String body){
 
         List<Integer> romData = Arrays.stream(body.split(","))
-                .map((str) -> {
+                .map(str -> {
                     if(str.startsWith("[")){
                         return Integer.parseInt(str.substring(1));
                     } else if (str.contains("]")) {

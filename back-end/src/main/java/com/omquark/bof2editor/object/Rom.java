@@ -190,7 +190,6 @@ public class Rom {
                     sb.append((char) convertByte(readChar).byteValue());
                 }
             }
-            //if (readChar == 0x01) break;
         }
         return sb.toString();
     }

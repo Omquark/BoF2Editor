@@ -24,7 +24,7 @@ public class StringParser {
     public static String fromRom(List<Integer> romString){
         StringBuilder sb = new StringBuilder();
 
-        romString.forEach((ch) -> {
+        romString.forEach(ch -> {
             if(ch.byteValue() == 0x00) sb.append("");
             else if(ch.byteValue() == 0x29) sb.append("-");
             else if (ch.byteValue() == 0x2D) sb.append(".");

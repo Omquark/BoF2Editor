@@ -1,5 +1,6 @@
 package com.omquark.bof2editor.object;
 
+import com.omquark.bof2editor.Logger.Logger;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +17,6 @@ public class Script {
 
     List<String> getGameScript(List<Integer> rom){
         int bankIncrementOffset = 0x22DDF0;
-        int bank = 0x29;
         int indexPosition = 0x22DE00;
         int bankOffset = 0x00;
         int index = 0x00;
@@ -34,6 +34,7 @@ public class Script {
                 }
             }
         }
+        Logger.writeToLog(Logger.LogLevel.DEBUG, Integer.toString(bankOffset));
         return new ArrayList<>();
     }
 }
