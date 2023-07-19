@@ -93,7 +93,7 @@ pipeline {
 
 			steps {
 				dir('front-end'){
-					sh 'npm install --omit=dev'
+					sh 'npm install'
 					sh 'npm run build'
 				}
 			}
