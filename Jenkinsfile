@@ -99,10 +99,14 @@ pipeline {
 			}
 		}
 
-		stage("Launch Docker Image"){
+		stage("Build Docker Image"){
 			steps{
-				sh 'docker build -t bof2editor:test  .'
-				sh 'docker run -d --name bof2editor -p 80:5000 bof2editor:test'
+				script{
+					def imageName="bof2editor"
+					def imageTag="latest"
+
+					docker.build("${imageName}:${imageTag}", "-f Dockerfile .")
+				}
 			}
 		}
 	}
