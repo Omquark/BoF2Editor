@@ -86,9 +86,6 @@ pipeline {
 		}
 
 		stage("front-end build"){
-			environment{
-				CI = false
-			}
 
 			tools {
 				nodejs 'Nodejs'
@@ -96,9 +93,16 @@ pipeline {
 
 			steps {
 				dir('front-end'){
-					sh 'npm install'
+					sh 'npm install --omit=dev'
 					sh 'npm run build'
 				}
+			}
+		}
+
+		stage("Launch Docker Image"){
+			steps{
+				sh 'docker build -t bof2editor:test  .'
+				sh 'docker run -d --name bof2editor -p 80:5000 bof2editor:test'
 			}
 		}
 	}

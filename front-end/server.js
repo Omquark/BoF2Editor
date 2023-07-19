@@ -4,12 +4,13 @@ const path = require('path');
 const cwd = process.cwd();
 const https = require('https');
 const fs = require('fs');
+const os = require('os');
 const proxyMiddleWare = require('http-proxy-middleware');
 const cors = require('cors');
 
-const projectPath = 'z:\\Coding Projects\\BoF2Editor'
+const projectPath = os.type().includes('Windows') ? 'z:\\Coding Projects\\BoF2Editor' : '/opt/bof2editor'
 const configFile = 'config.prop';
-const configPath = 'server\\config';
+const configPath = os.type().includes('Windows') ? path.join(projectPath, 'config') : '/etc/opt/bof2editor';
 const hostPath = 'front-end\\build';
 
 const backEndPortDefault = 6000;
@@ -18,7 +19,7 @@ const backEndHostDefault = 'localhost';
 const frontEndHostDefault = 'localhost';
 
 
-let buildPath = 'front-end\\build';
+let buildPath = path.join(projectPath, os.type().includes('Windows') ? 'bin\\build' : 'bin/build');
 let indexFile = 'index.html';
 
 let backEndPort = backEndPortDefault;
@@ -54,7 +55,7 @@ const setLogLevel = (level) => {
  */
 const loadConfig = () => {
     //The raw input from the config file
-    let resolvedConfigFile = path.join(projectPath, configPath, configFile);
+    let resolvedConfigFile = path.join(configPath, configFile);
     writeLog('INFO', `Attempting to open the config file from ${resolvedConfigFile}`);
     let rawString = fs.readFileSync(resolvedConfigFile, { encoding: 'utf-8' });
 
@@ -118,7 +119,7 @@ const proxyOptions = {
     changeOrigin: true,
 }
 
-app.use(express.static(path.join(cwd, buildPath)));
+app.use(express.static(buildPath));
 
 // app.use(['*'], (_req, res) => {
 //     writeLog('DEBUG', 'Serving file from app.use')
@@ -127,13 +128,13 @@ app.use(express.static(path.join(cwd, buildPath)));
 // })
 
 proxyMiddleWare.createProxyMiddleware(proxyOptions),
-app.put(['/', '/rom'], (req, res) => {
+app.get(['/', '/rom'], (req, res) => {
     if(req.path === '/rom'){
 
     }
-    let indexPath = path.join(projectPath, buildPath, indexFile);
+    let indexPath = path.join(buildPath, indexFile);
     let options = {
-        root: path.join(projectPath, buildPath),
+        root: path.join(buildPath),
     }
     writeLog('INFO', `Serving files from ${options.root}`);
     writeLog('DEBUG', 'Setting type and status to 200');

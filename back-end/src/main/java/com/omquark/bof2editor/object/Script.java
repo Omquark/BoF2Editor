@@ -19,10 +19,10 @@ public class Script {
         int bankIncrementOffset = 0x22DDF0;
         int indexPosition = 0x22DE00;
         int bankOffset = 0x00;
-        int index = 0x00;
+        //int index = 0x00;
 
 
-        for( ; indexPosition < 0x22FFFE; indexPosition += 0x02, index += 2){
+        for( ; indexPosition < 0x22FFFE; indexPosition += 0x02/*, index += 2*/){
             int value = rom.get(indexPosition) + (rom.get(indexPosition + 0x01) * 0x100);
             for(int loopOffset = 0; loopOffset < 0x10; loopOffset += 2){
                 int check = rom.get(bankIncrementOffset + loopOffset) +
