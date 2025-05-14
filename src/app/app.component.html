@@ -1,0 +1,36 @@
+<input #fileInput type="file" class="hidden" (change)="onFileSelected($event)" />
+
+<nav class="">
+  <lib-toastify-toast-container></lib-toastify-toast-container>
+  <lucide-icon (click)="toggleMenu()" class='text-white h-24 w-24 inline-flex' [img]="menuIcon"></lucide-icon>
+  <div *ngIf='this.menuShown' class='absolute bg-[#5A256A] opacity-90'>
+    <div *ngIf='!this.dataInit'>
+      <app-custom-button (onClick)="openFileDialog()"> No ROM loaded </app-custom-button>
+    </div>
+    <div *ngIf='this.dataInit'>
+      <app-custom-button>Items</app-custom-button>
+    </div>
+  </div>
+</nav>
+
+<div *ngIf="!this.dataInit" class="flex justify-center">
+  <app-custom-button *ngIf='!this.dataInit && !this.loading' class="inline-flex" (onClick)="openFileDialog()"> Upload
+    ROM </app-custom-button>
+  <app-custom-button *ngIf='this.dataInit' class="inline-flex" (onClick)="openFileDialog()"> Rom
+    Loaded </app-custom-button>
+</div>
+
+<!-- <div *ngif="this.state === 'SPELL'"> -->
+<div *ngIf="this.spellData">
+  <app-spell-component [spellData]="this.spellData"></app-spell-component>
+</div>
+<div *ngIf="this.dataInit === true && this.state === '' && !this.menuShown">
+  <div><app-custom-button (click)="changeState('SPELL')">Spell</app-custom-button></div>
+  <div><app-custom-button>Items</app-custom-button></div>
+</div>
+
+<div *ngIf="this.state.toUpperCase() === 'SPELL'">
+
+</div>
+
+<router-outlet />

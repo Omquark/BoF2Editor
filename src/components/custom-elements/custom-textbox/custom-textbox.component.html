@@ -1,0 +1,18 @@
+<div class="">
+  <div class="flex justify-between">
+    <label class="" [id]="'label-{{id}}'" [for]="this.id">
+      <app-custom-font class='' [scale]="4" [large]="true">
+        <span class="hidden" #imageContent>{{this.labelName}}</span>
+      </app-custom-font>
+    </label>
+    <div class="relative">
+      <input [class]="'border-4 border-white bg-transparent relative z-10'" type="'text'" (input)="updateText($event)"
+        (keypress)="sanitizeText($event)" [id]='this.id' [maxlength]="maxLength ? maxLength : 8" [name]="this.id"
+        [defaultValue]="this.defaultValue" [disabled]="disabled" [(ngModel)]="text" style="border-style: inset"
+        [style]="'width: 224px;'" #textContent />
+      <app-custom-font [class]="'absolute top-0 left-4 w-full h-full pointer-events-none'" [scale]="4" [large]="true">
+        <span class='hidden' #imageContent>{{this.text}}</span>
+      </app-custom-font>
+    </div>
+  </div>
+</div>

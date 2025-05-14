@@ -1,0 +1,19 @@
+.font-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+}
+
+.font-character {
+  width: 8px;
+  height: 8px;
+  background-image: url('../../../assets/letters.png');
+  image-rendering: pixelated;
+}
+
+.large-top {
+  position: relative;
+  top: 0px;
+}
